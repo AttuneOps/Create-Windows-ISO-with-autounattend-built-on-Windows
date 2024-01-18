@@ -1,0 +1,31 @@
+$ISO_BUILD="C:\attuneautomationworker"
+$BUILD_DIR="${ISO_BUILD}\build-{newOsNode.fqn}"
+
+# This is so we place the "attune_wsl_create_answer_file_iso.sh" outside the $DRIVERS_FOLDER
+Set-Location "${BUILD_DIR}"
+
+$DRIVERS_FOLDER="drivers"
+$DRIVERS_ISO_NAME="drivers_{newOsNode.fqn}.iso"
+
+    $scriptContent=@"
+mkisofs \
+    -o "../${DRIVERS_ISO_NAME}" \
+    -iso-level 3 -udf -joliet-long -relaxed-filenames \
+    -J -l -D -N -V "DRIVERS" "${DRIVERS_FOLDER}" \
+    autounattend.xml post_install_setup.ps1
+"@
+
+# Replace CRLF with LF
+$scriptContent = $scriptContent.replace("`r`n","`n")
+    
+$FILE = "attune_wsl_create_answer_file_iso.sh"
+
+Set-Content -Path $FILE -NoNewline -Value $scriptContent
+
+wsl -d Ubuntu --user root --exec bash "${FILE}"
+
+if ($LASTEXITCODE -ne 0) {
+    Write-Error 'Failed to create $ISO_BUILD\${DRIVERS_ISO_NAME}'
+}
+  
+Remove-Item "${FILE}"

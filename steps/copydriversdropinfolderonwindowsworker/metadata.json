@@ -1,0 +1,16 @@
+{
+    "actionOnStepFail": null, 
+    "enabled": true, 
+    "externalUuid4": "b04af1ce-1950-4b96-ab06-95a0170e89bf", 
+    "interpreter": 2, 
+    "interpreterCommand": "", 
+    "interpreterScriptExt": null, 
+    "interpreterScriptSyntax": "", 
+    "key": "copydriversdropinfolderonwindowsworker", 
+    "name": "Copy Drivers Drop in Folder on Windows Worker", 
+    "osCredKey": "automationworkerwindowsuseradministrator", 
+    "serverKey": "automationworkerwindowsnode", 
+    "successExitCode": 0, 
+    "timeout": 120, 
+    "type": "com.servertribe.attune.tuples.StepWinRmTuple"
+}

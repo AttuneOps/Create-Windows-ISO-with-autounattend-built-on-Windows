@@ -1,0 +1,1 @@
+Deploys Windows Server 2019 ISO to `/c$/attuneautomationworker/build-winpe-iso`.

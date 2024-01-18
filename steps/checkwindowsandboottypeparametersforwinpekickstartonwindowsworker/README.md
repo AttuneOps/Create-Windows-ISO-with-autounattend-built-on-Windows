@@ -1,0 +1,1 @@
+Check if boot type is configured correctly.

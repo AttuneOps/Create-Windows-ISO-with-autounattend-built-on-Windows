@@ -1,0 +1,47 @@
+$ISO_BUILD="C:\attuneautomationworker"
+$BUILD_FOLDER="build-{newOsNode.fqn}"
+
+# This is so we place the "tmpBash.sh" outside the $BUILD_FOLDER
+Set-Location $ISO_BUILD
+
+if (${{isWin10Uefi}} -or `
+    ${{isWinServerUefi}}) {
+
+    $scriptContent=@"
+mkisofs \
+    -allow-limited-size \
+    -iso-level 4 \
+    -full-iso9660-filenames \
+    -rock \
+    -b boot/etfsboot.com \
+    -no-emul-boot \
+    -boot-load-seg 0 \
+    -boot-load-size 8 \
+    -hide boot.catalog \
+    -eltorito-alt-boot \
+    -no-emul-boot \
+    -b efi/microsoft/boot/efisys.bin \
+    -boot-load-size 1 \
+    -udf \
+    -untranslated-filenames \
+    -disable-deep-relocation \
+    -o kickstart_{newOsNode.fqn}.iso \
+    '${BUILD_FOLDER}'
+"@
+
+    # Replace CRLF with LF
+    $scriptContent = $scriptContent.replace("`r`n","`n")
+    
+    $FILE = "attune_wsl_create_uefi_boot_iso.sh"
+
+    Set-Content -Path $FILE -NoNewline -Value $scriptContent
+
+    wsl -d Ubuntu --user root --exec bash "${FILE}"
+
+    if ($LASTEXITCODE -ne 0) {
+        Write-Error 'Failed to extract boot.img'
+    }
+
+} else {
+    Write-Host "Skipping for BIOS boot."
+}

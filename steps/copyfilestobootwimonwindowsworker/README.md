@@ -1,0 +1,1 @@
+In the `C:\attuneautomationworker\build-{newOsNode.fqn}` folder, moves `startnet.cmd` to the folder `WinPE_BootImageDir/Windows/System32`.

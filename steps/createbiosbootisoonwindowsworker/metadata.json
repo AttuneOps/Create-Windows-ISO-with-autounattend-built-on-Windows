@@ -1,0 +1,16 @@
+{
+    "actionOnStepFail": null, 
+    "enabled": true, 
+    "externalUuid4": "10080503-adf3-4f8e-ac64-9b47041d025b", 
+    "interpreter": 2, 
+    "interpreterCommand": "", 
+    "interpreterScriptExt": null, 
+    "interpreterScriptSyntax": "", 
+    "key": "createbiosbootisoonwindowsworker", 
+    "name": "Create BIOS Boot ISO on Windows Worker", 
+    "osCredKey": "automationworkerwindowsuseradministrator", 
+    "serverKey": "automationworkerwindowsnode", 
+    "successExitCode": 0, 
+    "timeout": 300, 
+    "type": "com.servertribe.attune.tuples.StepWinRmTuple"
+}

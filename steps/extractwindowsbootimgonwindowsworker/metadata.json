@@ -1,0 +1,16 @@
+{
+    "actionOnStepFail": "stop", 
+    "enabled": true, 
+    "externalUuid4": "1b7aec8a-7b5d-46a5-bf94-2638d7c6a172", 
+    "interpreter": 2, 
+    "interpreterCommand": "", 
+    "interpreterScriptExt": null, 
+    "interpreterScriptSyntax": "", 
+    "key": "extractwindowsbootimgonwindowsworker", 
+    "name": "Extract Windows boot.img on Windows Worker", 
+    "osCredKey": "automationworkerwindowsuseradministrator", 
+    "serverKey": "automationworkerwindowsnode", 
+    "successExitCode": 0, 
+    "timeout": 300, 
+    "type": "com.servertribe.attune.tuples.StepWinRmTuple"
+}

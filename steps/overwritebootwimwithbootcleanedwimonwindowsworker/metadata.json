@@ -1,0 +1,16 @@
+{
+    "actionOnStepFail": "stop", 
+    "enabled": true, 
+    "externalUuid4": "65b4f25b-02a5-4572-850c-0dc3a701cfc1", 
+    "interpreter": 2, 
+    "interpreterCommand": "", 
+    "interpreterScriptExt": null, 
+    "interpreterScriptSyntax": "", 
+    "key": "overwritebootwimwithbootcleanedwimonwindowsworker", 
+    "name": "Overwrite BOOT.WIM with BOOT_CLEANED.WIM on Windows Worker", 
+    "osCredKey": "automationworkerwindowsuseradministrator", 
+    "serverKey": "automationworkerwindowsnode", 
+    "successExitCode": 0, 
+    "timeout": 120, 
+    "type": "com.servertribe.attune.tuples.StepWinRmTuple"
+}

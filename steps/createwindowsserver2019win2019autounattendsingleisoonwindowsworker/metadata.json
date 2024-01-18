@@ -1,0 +1,68 @@
+{
+    "actionOnStepFail": "stop", 
+    "concurrency": 1, 
+    "enabled": true, 
+    "externalUuid4": "b63a4548-c3da-4b90-bfd4-c376f74a3bca", 
+    "isBlueprint": true, 
+    "key": "createwindowsserver2019win2019autounattendsingleisoonwindowsworker", 
+    "links": [
+        {
+            "order": 0, 
+            "stepKey": "checkinputparametervaluesforwindowsserversingleisokickstartonwindowsworker"
+        }, 
+        {
+            "order": 50, 
+            "stepKey": "checkifipaddressisinsubnetonwindowsworker"
+        }, 
+        {
+            "order": 100, 
+            "stepKey": "checkifgatewayipaddressisinsubnetonwindowsworker"
+        }, 
+        {
+            "order": 200, 
+            "stepKey": "verifywslisinstalled"
+        }, 
+        {
+            "order": 250, 
+            "stepKey": "cleanupbuildfilesandisosonwindowsworker"
+        }, 
+        {
+            "order": 300, 
+            "stepKey": "deploywin2019dvdisoonwindowsworker"
+        }, 
+        {
+            "order": 400, 
+            "stepKey": "extractwindowsbootimgonwindowsworker"
+        }, 
+        {
+            "order": 450, 
+            "stepKey": "extractwindowsisoonwindowsworker"
+        }, 
+        {
+            "order": 500, 
+            "stepKey": "deploypostsetuppowershellscriptonwindowsworker"
+        }, 
+        {
+            "order": 550, 
+            "stepKey": "deploywindowsunattendedconfigonwindowsworker"
+        }, 
+        {
+            "order": 600, 
+            "stepKey": "copydriversdropinfolderonwindowsworker"
+        }, 
+        {
+            "order": 650, 
+            "stepKey": "copyefisysnopromptbinintoefisysbinonwindowsworker"
+        }, 
+        {
+            "order": 700, 
+            "stepKey": "createbiosbootisoonwindowsworker"
+        }, 
+        {
+            "order": 750, 
+            "stepKey": "createuefibootisoonwindowsworker"
+        }
+    ], 
+    "name": "Create Windows Server 2019 (Win2019) autounattend Single ISO on Windows Worker", 
+    "type": "com.servertribe.attune.tuples.StepGroupTuple"
+}

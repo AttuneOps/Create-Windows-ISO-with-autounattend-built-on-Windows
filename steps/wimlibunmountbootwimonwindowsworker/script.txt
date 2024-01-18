@@ -1,0 +1,14 @@
+$ISO_BUILD="{automationWorkerWindowsBaseDirectory}"
+$BUILD_DIR="${ISO_BUILD}\build-{newOsNode.fqn}"
+
+Set-Location "${BUILD_DIR}"
+
+$WinPE_BootImageDir = "WinPE_BootImageDir"
+
+Dism /Image:"./WinPE_BootImageDir" `
+    /cleanup-image `
+    /StartComponentCleanup `
+    /ResetBase
+    
+# Unmount the WinPE_BootImageDir folder back into BOOT.WIM
+Dism /Unmount-Image /MountDir:"./WinPE_BootImageDir" /Commit
