@@ -1,7 +1,6 @@
-if ((-Not ${{isWin10Bios}}) -and `
-    (-Not ${{isWin10Uefi}})) {
+if (-Not ${{isWindowsWorkstation}}) {
 
-    Write-Host "Please set one of 'isWin10Bios' or 'isWin10Uefi' to true to install Win10."
+    Write-Host "Please set 'isWindowsWorkstation' to true to install Windows Workstation."
     exit 1
 } else {
     Write-Host "Ok."

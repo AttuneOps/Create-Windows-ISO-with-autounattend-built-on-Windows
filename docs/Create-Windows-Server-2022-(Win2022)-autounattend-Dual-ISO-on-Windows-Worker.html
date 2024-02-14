@@ -907,8 +907,7 @@ if (Test-Path $DIR) {
         <div class="col px-0">
             <pre>
                 <code class="language-sql py-0">
-if ((${{isWin10Bios}}) -or `
-    (${{isWinServerBios}})) {
+if (${{isBiosBoot}}) {
 
   $ISO_BUILD=&quot;C:\attuneautomationworker&quot;
   $BUILD_DIR=&quot;$ISO_BUILD\build-{newOsNode.fqn}&quot;
@@ -1071,7 +1070,7 @@ if (test-Path &quot;${ISO_WILDCARD}&quot; -pathtype leaf) {
         <div class="col px-0">
             <pre>
                 <code class="language-sql py-0">
-if ( ${{isWin10Uefi}} -or ${{isWinServerUefi}} ) {
+if ( ${{isUefiBoot}} ) {
 
     $ISO_BUILD=&quot;C:\attuneautomationworker&quot;
     $BUILD_DIR=&quot;$ISO_BUILD\build-{newOsNode.fqn}&quot;
@@ -1148,8 +1147,7 @@ $BUILD_FOLDER=&quot;build-{newOsNode.fqn}&quot;
 # This is so we place the &quot;attune_wsl_create_bios_boot_iso.sh&quot; outside the $BUILD_FOLDER
 Set-Location $ISO_BUILD
 
-if (${{isWin10Bios}} -or `
-    ${{isWinServerBios}}) {
+if ( ${{isBiosBoot}} ) {
 
     $scriptContent=@&quot;
 mkisofs \
@@ -1251,8 +1249,7 @@ $BUILD_FOLDER=&quot;build-{newOsNode.fqn}&quot;
 # This is so we place the &quot;tmpBash.sh&quot; outside the $BUILD_FOLDER
 Set-Location $ISO_BUILD
 
-if (${{isWin10Uefi}} -or `
-    ${{isWinServerUefi}}) {
+if ( ${{isUefiBoot}} ) {
 
     $scriptContent=@&quot;
 mkisofs \

@@ -478,10 +478,9 @@ mstsc /admin /v:{automationworkerwindowsnode}
         <div class="col px-0">
             <pre>
                 <code class="language-sql py-0">
-if ((-Not ${{isWin10Bios}}) -and `
-    (-Not ${{isWin10Uefi}})) {
+if (-Not ${{isWindowsWorkstation}}) {
 
-    Write-Host &quot;Please set one of &#x27;isWin10Bios&#x27; or &#x27;isWin10Uefi&#x27; to true to install Win10.&quot;
+    Write-Host &quot;Please set &#x27;isWindowsWorkstation&#x27; to true to install Windows Workstation.&quot;
     exit 1
 } else {
     Write-Host &quot;Ok.&quot;
@@ -991,8 +990,7 @@ if (Test-Path $DIR) {
         <div class="col px-0">
             <pre>
                 <code class="language-sql py-0">
-if ((${{isWin10Bios}}) -or `
-    (${{isWinServerBios}})) {
+if (${{isBiosBoot}}) {
 
   $ISO_BUILD=&quot;C:\attuneautomationworker&quot;
   $BUILD_DIR=&quot;$ISO_BUILD\build-{newOsNode.fqn}&quot;
@@ -1352,7 +1350,7 @@ if ( Test-Path &quot;${DRIVERS_DROP_IN_FOLDER}&quot; ) {
         <div class="col px-0">
             <pre>
                 <code class="language-sql py-0">
-if ( ${{isWin10Uefi}} -or ${{isWinServerUefi}} ) {
+if ( ${{isUefiBoot}} ) {
 
     $ISO_BUILD=&quot;C:\attuneautomationworker&quot;
     $BUILD_DIR=&quot;$ISO_BUILD\build-{newOsNode.fqn}&quot;
@@ -1429,8 +1427,7 @@ $BUILD_FOLDER=&quot;build-{newOsNode.fqn}&quot;
 # This is so we place the &quot;attune_wsl_create_bios_boot_iso.sh&quot; outside the $BUILD_FOLDER
 Set-Location $ISO_BUILD
 
-if (${{isWin10Bios}} -or `
-    ${{isWinServerBios}}) {
+if ( ${{isBiosBoot}} ) {
 
     $scriptContent=@&quot;
 mkisofs \
@@ -1532,8 +1529,7 @@ $BUILD_FOLDER=&quot;build-{newOsNode.fqn}&quot;
 # This is so we place the &quot;tmpBash.sh&quot; outside the $BUILD_FOLDER
 Set-Location $ISO_BUILD
 
-if (${{isWin10Uefi}} -or `
-    ${{isWinServerUefi}}) {
+if ( ${{isUefiBoot}} ) {
 
     $scriptContent=@&quot;
 mkisofs \

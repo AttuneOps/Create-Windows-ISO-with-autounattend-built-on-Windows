@@ -23,16 +23,12 @@
             "stepKey": "checkifgatewayipaddressisinsubnetonwindowsworker"
         }, 
         {
-            "order": 400, 
-            "stepKey": "verifywslisinstalled"
-        }, 
-        {
             "order": 500, 
             "stepKey": "cleanupbuildfilesandisosonwindowsworker"
         }, 
         {
-            "order": 600, 
-            "stepKey": "deploywin10dvdisoonwindowsworker"
+            "order": 650, 
+            "stepKey": "deploywin11dvdisoonwindowsworker"
         }, 
         {
             "order": 700, 
