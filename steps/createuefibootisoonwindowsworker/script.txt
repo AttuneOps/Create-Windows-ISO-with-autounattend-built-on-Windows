@@ -1,46 +1,20 @@
-$ISO_BUILD="C:\attuneautomationworker"
+$ISO_BUILD="{automationWorkerWindowsBaseDirectory}"
 $BUILD_FOLDER="build-{newOsNode.fqn}"
 
-# This is so we place the "tmpBash.sh" outside the $BUILD_FOLDER
+# Set location to ISO_BUILD
 Set-Location $ISO_BUILD
 
 if ( ${{isUefiBoot}} ) {
+    $isoName = "kickstart_{newOsNode.fqn}.iso"
+    $bootData = "2#p0,e,b${BUILD_FOLDER}\boot\etfsboot.com#pEF,e,b${BUILD_FOLDER}\efi\microsoft\boot\efisys.bin"
 
-    $scriptContent=@"
-mkisofs \
-    -allow-limited-size \
-    -iso-level 4 \
-    -full-iso9660-filenames \
-    -rock \
-    -b boot/etfsboot.com \
-    -no-emul-boot \
-    -boot-load-seg 0 \
-    -boot-load-size 8 \
-    -hide boot.catalog \
-    -eltorito-alt-boot \
-    -no-emul-boot \
-    -b efi/microsoft/boot/efisys.bin \
-    -boot-load-size 1 \
-    -udf \
-    -untranslated-filenames \
-    -disable-deep-relocation \
-    -o kickstart_{newOsNode.fqn}.iso \
-    '${BUILD_FOLDER}'
-"@
-
-    # Replace CRLF with LF
-    $scriptContent = $scriptContent.replace("`r`n","`n")
-    
-    $FILE = "attune_wsl_create_uefi_boot_iso.sh"
-
-    Set-Content -Path $FILE -NoNewline -Value $scriptContent
-
-    wsl -d Ubuntu --user root --exec bash "${FILE}"
+    # Command to create UEFI compatible ISO
+    & "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\amd64\Oscdimg\oscdimg.exe" `
+        -m -o -u2 -udfver102 -bootdata:$bootData "${BUILD_FOLDER}" $isoName
 
     if ($LASTEXITCODE -ne 0) {
-        Write-Error 'Failed to extract boot.img'
+        Write-Error 'Failed to create UEFI boot ISO'
     }
-
 } else {
     Write-Host "Skipping for BIOS boot."
 }

@@ -786,10 +786,10 @@ if (echo $?) {
         <div class="col px-0">
             <pre>
                 <code class="language-sql py-0">
-$DIR=&quot;C:\attuneautomationworker\build-{newOsNode.fqn}&quot;
+$DIR=&quot;{automationWorkerWindowsBaseDirectory}\build-{newOsNode.fqn}&quot;
 
 if (Test-Path $DIR) {
-    Remove-Path -Recursive $DIR
+    Remove-Item $DIR -Recurse -Force -Verbose
 }
                 </code>
             </pre>
@@ -909,7 +909,7 @@ if (Test-Path $DIR) {
                 <code class="language-sql py-0">
 if (${{isBiosBoot}}) {
 
-  $ISO_BUILD=&quot;C:\attuneautomationworker&quot;
+  $ISO_BUILD=&quot;{automationWorkerWindowsBaseDirectory}&quot;
   $BUILD_DIR=&quot;$ISO_BUILD\build-{newOsNode.fqn}&quot;
 
 
@@ -997,7 +997,7 @@ dd if=$F of=boot.img bs=2048 count=8 skip=$OFFSET;
         <div class="col px-0">
             <pre>
                 <code class="language-sql py-0">
-$ISO_BUILD=&quot;C:\attuneautomationworker&quot;
+$ISO_BUILD=&quot;{automationWorkerWindowsBaseDirectory}&quot;
 $BUILD_DIR=&quot;$ISO_BUILD\build-{newOsNode.fqn}&quot;
 
 Set-Location $BUILD_DIR
@@ -1072,7 +1072,7 @@ if (test-Path &quot;${ISO_WILDCARD}&quot; -pathtype leaf) {
                 <code class="language-sql py-0">
 if ( ${{isUefiBoot}} ) {
 
-    $ISO_BUILD=&quot;C:\attuneautomationworker&quot;
+    $ISO_BUILD=&quot;{automationWorkerWindowsBaseDirectory}&quot;
     $BUILD_DIR=&quot;$ISO_BUILD\build-{newOsNode.fqn}&quot;
 
     Set-Location $BUILD_DIR
@@ -1141,7 +1141,7 @@ if ( ${{isUefiBoot}} ) {
         <div class="col px-0">
             <pre>
                 <code class="language-sql py-0">
-$ISO_BUILD=&quot;C:\attuneautomationworker&quot;
+$ISO_BUILD=&quot;{automationWorkerWindowsBaseDirectory}&quot;
 $BUILD_FOLDER=&quot;build-{newOsNode.fqn}&quot;
 
 # This is so we place the &quot;attune_wsl_create_bios_boot_iso.sh&quot; outside the $BUILD_FOLDER
@@ -1243,49 +1243,23 @@ mkisofs \
         <div class="col px-0">
             <pre>
                 <code class="language-sql py-0">
-$ISO_BUILD=&quot;C:\attuneautomationworker&quot;
+$ISO_BUILD=&quot;{automationWorkerWindowsBaseDirectory}&quot;
 $BUILD_FOLDER=&quot;build-{newOsNode.fqn}&quot;
 
-# This is so we place the &quot;tmpBash.sh&quot; outside the $BUILD_FOLDER
+# Set location to ISO_BUILD
 Set-Location $ISO_BUILD
 
 if ( ${{isUefiBoot}} ) {
+    $isoName = &quot;kickstart_{newOsNode.fqn}.iso&quot;
+    $bootData = &quot;2#p0,e,b${BUILD_FOLDER}\boot\etfsboot.com#pEF,e,b${BUILD_FOLDER}\efi\microsoft\boot\efisys.bin&quot;
 
-    $scriptContent=@&quot;
-mkisofs \
-    -allow-limited-size \
-    -iso-level 4 \
-    -full-iso9660-filenames \
-    -rock \
-    -b boot/etfsboot.com \
-    -no-emul-boot \
-    -boot-load-seg 0 \
-    -boot-load-size 8 \
-    -hide boot.catalog \
-    -eltorito-alt-boot \
-    -no-emul-boot \
-    -b efi/microsoft/boot/efisys.bin \
-    -boot-load-size 1 \
-    -udf \
-    -untranslated-filenames \
-    -disable-deep-relocation \
-    -o kickstart_{newOsNode.fqn}.iso \
-    &#x27;${BUILD_FOLDER}&#x27;
-&quot;@
-
-    # Replace CRLF with LF
-    $scriptContent = $scriptContent.replace(&quot;`r`n&quot;,&quot;`n&quot;)
-    
-    $FILE = &quot;attune_wsl_create_uefi_boot_iso.sh&quot;
-
-    Set-Content -Path $FILE -NoNewline -Value $scriptContent
-
-    wsl -d Ubuntu --user root --exec bash &quot;${FILE}&quot;
+    # Command to create UEFI compatible ISO
+    &amp; &quot;C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\amd64\Oscdimg\oscdimg.exe&quot; `
+        -m -o -u2 -udfver102 -bootdata:$bootData &quot;${BUILD_FOLDER}&quot; $isoName
 
     if ($LASTEXITCODE -ne 0) {
-        Write-Error &#x27;Failed to extract boot.img&#x27;
+        Write-Error &#x27;Failed to create UEFI boot ISO&#x27;
     }
-
 } else {
     Write-Host &quot;Skipping for BIOS boot.&quot;
 }
@@ -1467,12 +1441,12 @@ called by <code>autounattend.xml</code> <code>&lt;FirstLogonCommands&gt;</code>'
         <div class="col px-0">
             <pre>
                 <code class="language-sql py-0">
-$ISO_BUILD=&quot;C:\attuneautomationworker&quot;
+$ISO_BUILD=&quot;{automationWorkerWindowsBaseDirectory}&quot;
 $BUILD_DIR=&quot;${ISO_BUILD}\build-{newOsNode.fqn}&quot;
 
 Set-Location &quot;${BUILD_DIR}&quot;
 
-$DRIVERS_DROP_IN_FOLDER = &quot;C:\attuneautomationworker\drivers-{newOsNode.fqn}&quot;
+$DRIVERS_DROP_IN_FOLDER = &quot;{automationWorkerWindowsBaseDirectory}\drivers-{newOsNode.fqn}&quot;
 $DESTINATION_DRIVERS_FOLDER = &quot;drivers&quot;
 
 if ( -Not (Test-Path &quot;${DESTINATION_DRIVERS_FOLDER}&quot;) ) {

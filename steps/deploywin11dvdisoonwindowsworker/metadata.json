@@ -1,7 +1,7 @@
 {
     "actionOnStepFail": "stop", 
     "archiveKey": "win11iso", 
-    "deployPath": "/c$/attuneautomationworker/build-{newOsNode.fqn}", 
+    "deployPath": "{automationWorkerWindowsBaseDirectorySharePath}/build-{newOsNode.fqn}", 
     "enabled": true, 
     "externalUuid4": "d1467c27-aa46-4b1d-a862-5407a56d5ab9", 
     "key": "deploywin11dvdisoonwindowsworker", 

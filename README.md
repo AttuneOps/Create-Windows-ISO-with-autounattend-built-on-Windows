@@ -131,7 +131,6 @@ The Windows worker can run Linux commands using Windows Subsystem for Linux.
 | Name | Type | Script Reference | Comment |
 | ---- | ---- | ---------------- | ------- |
 | Automation Worker Windows Base Directory | Text | `automationworkerwindowsbasedirectory` | Base directory for deploying temporary files to build the ISO on a Windows Worker.<br><br>eg. "C:/attune_auto_installer" |
-| Automation Worker Windows Base Directory Share Path | Text | `automationworkerwindowsbasedirectorysharepath` | eg. "/c$/attune_auto_installer" |
 | Automation Worker Windows Node | Windows Node | `automationworkerwindowsnode` | The Windows automation worker node used to perform tasks to create the ISO. |
 | Automation Worker Windows User: Administrator | Windows Credential | `automationworkerwindowsuseradministrator` | Administrator user on the Windows Automation Worker node. |
 | Drivers and Autounattend Drive Letter | Text | `driversandautounattenddriveletter` | The Windows drive letter containing the drivers and autounattend.xml as a single letter.<br><br>This will be different for each install method.<br>D for "Single ISO"<br>E for "Dual ISO"<br>X for "WinPE ISO" |
@@ -156,6 +155,7 @@ The Windows worker can run Linux commands using Windows Subsystem for Linux.
 | Post Install Setup Script Drive Letter | Text | `postinstallsetupscriptdriveletter` | The Windows drive letter containing the Post Install PowerShell setup script post_install_setup.ps1 as a single letter as seen by the Windows installer.<br><br>This will be different for each install method.<br><br>D for "Single ISO"<br>E for "Dual ISO"<br>C for "WinPE ISO" |
 | Samba Server IP Address | Text | `sambaserveripaddress` |  |
 | Windows Folder On Samba | Text | `windowsfolderonsamba` | The Windows folder on the Samba server. This parameter is used by startnet.cmd and can take these values:<br><br>- windows10<br>- windows2016<br>- windows2019<br>- windows2022 |
+| Automation Worker Windows Base Directory Share Path | Text | `automationworkerwindowsbasedirectorysharepath` | Base directory for deploying temporary files to build the ISO on a Windows Worker.<br><br>eg. "/c$/attune_auto_installer" |
 
 
 
