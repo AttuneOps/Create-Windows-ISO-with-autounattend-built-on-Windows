@@ -8,11 +8,11 @@
     "links": [
         {
             "order": 0, 
-            "stepKey": "checkinputparametervaluesforwin10kickstartonwindowsworker"
+            "stepKey": "checkinputparametervaluesforwindowsworkstationonwindowsworker"
         }, 
         {
             "order": 100, 
-            "stepKey": "checkmaximumlengthofwin10hostnameonwindowsworker"
+            "stepKey": "checkmaximumlengthofwindowsworkstationhostnameonwindowsworker"
         }, 
         {
             "order": 200, 

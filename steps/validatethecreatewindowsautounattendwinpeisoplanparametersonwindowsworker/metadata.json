@@ -28,7 +28,7 @@
         }, 
         {
             "order": 250, 
-            "stepKey": "checkmaximumlengthofwin10hostnameonwindowsworker"
+            "stepKey": "checkmaximumlengthofwindowsworkstationhostnameonwindowsworker"
         }, 
         {
             "order": 300, 
